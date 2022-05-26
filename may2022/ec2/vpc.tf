@@ -111,3 +111,39 @@ resource "aws_route_table_association" "pub_sub_2_associtation" {
   route_table_id = aws_route_table.public_rt.id
 }
 
+
+resource "aws_route" "peering_route" {
+  route_table_id            = aws_route_table.public_rt.id
+  destination_cidr_block    = "10.1.0.0/16"
+  vpc_peering_connection_id = aws_vpc_peering_connection.gold_to_silver.id
+}
+
+###################--silver-vpc--###############################
+
+resource "aws_vpc" "silver_vpc" {
+  cidr_block           = "10.1.0.0/16"
+  enable_dns_hostnames = true
+
+  tags = {
+    Name = "silver-vpc"
+  }
+
+}
+
+resource "aws_subnet" "silver_sub_1" {
+
+  vpc_id     = aws_vpc.silver_vpc.id
+  cidr_block = "10.1.0.0/24"
+
+  tags = {
+    Name = "silver-sub-1"
+  }
+
+}
+
+resource "aws_route" "silver_peering_route" {
+  route_table_id            = aws_vpc.silver_vpc.main_route_table_id
+  destination_cidr_block    = "10.0.0.0/16"
+  vpc_peering_connection_id = aws_vpc_peering_connection.gold_to_silver.id
+}
+
