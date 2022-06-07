@@ -1,0 +1,91 @@
+terraform files extension .tf or .tf.json
+
+required_providers
+
+provider
+
+resource
+
+variable
+
+data
+
+module
+
+output
+
+local
+
+#HCL syntax
+<BLOCK TYPE> "<BLOCK LABEL>" "<BLOCK LABEL>" {
+    # Block body
+    <IDENTIFIER> = <EXPRESSION> # Argument
+  }
+
+  terraform {
+    required_providers {
+      mycloud = {
+        source  = "mycorp/mycloud"
+        version = "~> 1.0"
+      }
+    }
+  }
+
+  terraform {
+    required_providers {
+      aws = {
+        source  = "hashicorp/aws"
+        version = "~> 3.0"
+      }
+      azurerm = {
+        source  = "hashicorp/azurerm"
+        version = "=3.0.0"
+      }
+    }
+  }
+
+  terraform {
+    required_providers {
+      azurerm = {
+        source  = "hashicorp/azurerm"
+        version = "=3.0.0"
+      }
+    }
+  }
+
+  providers
+
+
+
+  #HCL syntax
+<BLOCK TYPE> "<BLOCK LABEL>" "<BLOCK LABEL>" {
+    # Block body
+    <IDENTIFIER> = <EXPRESSION> # Argument
+  }
+
+  resource "aws_instance" "demo_instance" {
+      ami = " "
+      instance_type = "t2.micro"
+      
+      tags = {
+          Name = "demo-instance"
+      }
+  }
+
+  resource "aws_s3_bucket" "sample_bucket" {
+      bucket = "rssr-some-bucket"
+      acl = private
+      versioning {
+          enabled = true
+      }
+  }
+
+  variable "name" {
+      type = string
+      default = "siva"
+      description = "provide name"
+  }
+
+  data "aws_s3_bucket" "existing_bucket" {
+      bucket = "existing-bucket-name"
+  }
