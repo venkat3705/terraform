@@ -12,6 +12,7 @@ variable "vpc_cidr_block" {
   description = "Enter your VPC Range"
   default = "10.0.0.0/16"
 }
+#================================================================
 
 resource "aws_vpc" "golden_vpc" {
   cidr_block           = var.vpc_cidr_block

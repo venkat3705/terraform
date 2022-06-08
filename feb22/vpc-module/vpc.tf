@@ -1,5 +1,10 @@
 module "my-vpc" {
   source         = "../base-network"
-  env            = "qa"
-  vpc_cidr_block = "192.168.0.0/16"
+  vpc_cidr_block = var.vpc_cidr_block
+  env            = terraform.workspace
+}
+
+variable "vpc_cidr_block" {
+  type = string
+  description = "provide cidr range"
 }
