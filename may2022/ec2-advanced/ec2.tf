@@ -1,11 +1,19 @@
 resource "aws_instance" "public_instance" {
   #instace_type
   instance_type        = "t2.micro"
-  ami                  = "ami-0c4f7023847b90238"
+  ami                  = "ami-0022f774911c1d690"
   security_groups      = [aws_security_group.tf_ec2_sg.id]
   subnet_id            = aws_subnet.pub_sub_1.id
   key_name             = aws_key_pair.deployer.key_name
   iam_instance_profile = aws_iam_instance_profile.tf_ec2_profile.name
+  user_data            = <<EOF
+    #!/bin/bash
+    sudo yum update -y
+    sudo yum install -y httpd
+    sudo systemctl start httpd.service
+    sudo systemctl enable httpd.service
+  EOF
+  #user_data = "${file("install_apache.sh")}"
   tags = {
     Name = "tf-instance"
   }
@@ -62,6 +70,6 @@ resource "tls_private_key" "tf_rsa" {
 }
 
 resource "local_file" "local_key_priavte" {
-    content  = tls_private_key.tf_rsa.private_key_pem
-    filename = "local_key.pem"
+  content  = tls_private_key.tf_rsa.private_key_pem
+  filename = "local_key.pem"
 }

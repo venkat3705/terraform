@@ -23,6 +23,25 @@ resource "aws_subnet" "public_subnet_2" {
     }  
 }
 
+resource "aws_subnet" "public_subnet_3" {
+    vpc_id = aws_vpc.main.id
+    cidr_block = "10.0.7.0/24"
+    tags = {
+        Name = "public-subnet-3"
+        Owner = "terraform"
+    }  
+}
+
+resource "aws_subnet" "public_subnet_4" {
+    vpc_id = aws_vpc.main.id
+    cidr_block = "10.0.8.0/24"
+    tags = {
+        Name = "public-subnet-4"
+        Owner = "terraform"
+    }  
+}
+
+
 resource "aws_route_table" "public_rt" {
     vpc_id = aws_vpc.main.id
 
