@@ -1,0 +1,166 @@
+<BLOCK TYPE> "<BLOCK LABEL>" "<BLOCK LABEL>" {
+  # Block body
+  <IDENTIFIER> = <EXPRESSION> # Argument
+}
+
+
+Resource
+
+Variable
+
+Output
+
+locals
+
+Data
+
+Module
+
+resource "aws_instance" "my_instance" {
+    ami = ""
+    instance_id = ""
+
+}
+
+{
+  "resource": {
+    "aws_instance": {
+      "example": {
+        "instance_type": "t2.micro",
+        "ami": "ami-abc123"
+      }
+    }
+  }
+}
+
+{
+    "variable" : {
+        "instance_type" : {
+            "type" : "string"
+            "description" : "instance type for ec2"
+            "default" : "t2.micro"
+        }
+    }
+
+}
+
+
+
+{
+  "variable": {
+    "example": {
+      "default": "hello"
+    }
+  }
+}
+
+Variable "instance_type" {
+    type = string
+    description = ""
+
+}
+
+Output "instance_dns" {
+    value= ""
+}
+
+{
+    "output" : {
+        "instance-dns" : {
+            "value" : ""
+        }
+    }
+}
+
+locals {
+
+}
+
+data "aws_instce" "import_instace" {
+    instace_id = ""
+}
+
+Module "my_module_instace" {
+    source = ""
+}
+
+HCL --> .tf (ec2.tf, s3.tf), tfvars(variable values)
+
+json --> .tf.json ( ec2.tf.json, s3.tf.json)
+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 1.0.4"
+    }
+
+    azurerm = {
+        source = "hashicorp/azurerm"
+        version = ""
+    }
+  }
+}
+
+provider "aws" {
+    region = ""
+    profile = ""
+    access_key = ""
+    secret_access_key = ""
+}
+
+
+terraform {
+  required_providers {
+    mycloud = {
+      source  = "mycorp/mycloud"
+      version = "~> 1.0"
+      configuration_aliases = [ mycloud.alternate ]
+    }
+  }
+}
+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 1.0"
+    }
+  }
+}
+
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 1.0"
+    }
+  }
+}
+
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 1.0"
+    }
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 1.0"
+    }
+  }
+}
+
+
+main.tf
+variables.tf
+locals.tf
+outputs.tf
+datasources.tf
+
+
+ec2.tf
+s3.tf
+vpc.tf
+iam.tf
+example_bucket.tf
