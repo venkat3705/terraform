@@ -57,7 +57,7 @@ variable "common_tags" {
 
 variable "user_names" {
   type    = list(any)
-  default = ["rsiva", "vishnu", "raghava"]
+  default = ["sample-1", "sample-2", "sample-3"]
 
 }
 
