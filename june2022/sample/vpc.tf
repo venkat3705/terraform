@@ -21,8 +21,9 @@ resource "aws_internet_gateway" "my_gw" {
 #public subnets and route tables 
 
 resource "aws_subnet" "pub_sub_1" {
-  vpc_id     = aws_vpc.tf_vpc.id
-  cidr_block = cidrsubnet(var.vpc_cidr_block, 8, 1)
+  vpc_id                  = aws_vpc.tf_vpc.id
+  cidr_block              = cidrsubnet(var.vpc_cidr_block, 8, 1)
+  map_public_ip_on_launch = true
   tags = {
     Name  = "tf-pub-sub-1"
     owner = var.owner
@@ -30,8 +31,9 @@ resource "aws_subnet" "pub_sub_1" {
 }
 
 resource "aws_subnet" "pub_sub_2" {
-  vpc_id     = aws_vpc.tf_vpc.id
-  cidr_block = cidrsubnet(var.vpc_cidr_block, 8, 2)
+  vpc_id                  = aws_vpc.tf_vpc.id
+  cidr_block              = cidrsubnet(var.vpc_cidr_block, 8, 2)
+  map_public_ip_on_launch = true
 
   tags = {
     Name  = "tf-pub-sub-2"
@@ -106,11 +108,11 @@ resource "aws_route_table_association" "private_sub_2_associate" {
 variable "owner" {
   type        = string
   description = "Enter owner name"
-  default = "rsiva"
+  default     = "rsiva"
 }
 
 variable "vpc_cidr_block" {
-  type = string
+  type        = string
   description = "provide cidr block"
-  default = "10.0.0.0/16"
+  default     = "10.0.0.0/16"
 }

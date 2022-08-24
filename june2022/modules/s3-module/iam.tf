@@ -44,6 +44,39 @@ resource "aws_iam_policy" "demo_policy" {
 }
 
 
+resource "aws_iam_policy" "demo_policy_2" {
+  name = "my-demo-policy-2"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "s3:Get*",
+          "s3:List*",
+        ]
+        Effect   = "Allow"
+        Resource = "arn:${data.aws_partition.current.id}:s3:::rssr-tf-demo-bucket-3"
+      },
+      {
+        Action = [
+          "iam:*",
+        ]
+        Effect   = "Allow"
+        Resource = "arn:${data.aws_partition.current.id}:iam::${data.aws_caller_identity.current.account_id}:user/*"
+      },
+      {
+        Action = [
+          "kms:*",
+        ]
+        Effect   = "Allow"
+        Resource = "arn:${data.aws_partition.current.id}:kms:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:key/*"
+      },
+    ]
+  })
+
+}
+
+
 output "print_user_names" {
   value = [for name in var.users : name]
 
