@@ -1,0 +1,185 @@
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_route_table.demo_pri_rt will be created
+  + resource "aws_route_table" "demo_pri_rt" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = (known after apply)
+      + tags             = {
+          + "Name" = "demo-pri-rt"
+        }
+      + tags_all         = {
+          + "Name" = "demo-pri-rt"
+        }
+      + vpc_id           = "vpc-0600cc23ff2b40f27"
+    }
+
+  # aws_route_table.demo_pub_rt will be created
+  + resource "aws_route_table" "demo_pub_rt" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = [
+          + {
+              + carrier_gateway_id         = ""
+              + cidr_block                 = "0.0.0.0/0"
+              + core_network_arn           = ""
+              + destination_prefix_list_id = ""
+              + egress_only_gateway_id     = ""
+              + gateway_id                 = "igw-09d33a7ea30763c09"
+              + instance_id                = ""
+              + ipv6_cidr_block            = ""
+              + local_gateway_id           = ""
+              + nat_gateway_id             = ""
+              + network_interface_id       = ""
+              + transit_gateway_id         = ""
+              + vpc_endpoint_id            = ""
+              + vpc_peering_connection_id  = ""
+            },
+        ]
+      + tags             = {
+          + "Name" = "demo-pub-rt"
+        }
+      + tags_all         = {
+          + "Name" = "demo-pub-rt"
+        }
+      + vpc_id           = "vpc-0600cc23ff2b40f27"
+    }
+
+  # aws_route_table_association.demo_pri_rt_ass_1 will be created
+  + resource "aws_route_table_association" "demo_pri_rt_ass_1" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_route_table_association.demo_pri_rt_ass_2 will be created
+  + resource "aws_route_table_association" "demo_pri_rt_ass_2" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_route_table_association.demo_pub_rt_ass_1 will be created
+  + resource "aws_route_table_association" "demo_pub_rt_ass_1" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_route_table_association.demo_pub_rt_ass_2 will be created
+  + resource "aws_route_table_association" "demo_pub_rt_ass_2" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_subnet.demo_pri_1 will be created
+  + resource "aws_subnet" "demo_pri_1" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = (known after apply)
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.2.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "demo-pri-1"
+        }
+      + tags_all                                       = {
+          + "Name" = "demo-pri-1"
+        }
+      + vpc_id                                         = "vpc-0600cc23ff2b40f27"
+    }
+
+  # aws_subnet.demo_pri_2 will be created
+  + resource "aws_subnet" "demo_pri_2" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = (known after apply)
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.3.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "demo-pri-2"
+        }
+      + tags_all                                       = {
+          + "Name" = "demo-pri-2"
+        }
+      + vpc_id                                         = "vpc-0600cc23ff2b40f27"
+    }
+
+  # aws_subnet.demo_pub_1 will be created
+  + resource "aws_subnet" "demo_pub_1" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = (known after apply)
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.0.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "demo-pub-1"
+        }
+      + tags_all                                       = {
+          + "Name" = "demo-pub-1"
+        }
+      + vpc_id                                         = "vpc-0600cc23ff2b40f27"
+    }
+
+  # aws_subnet.demo_pub_2 will be created
+  + resource "aws_subnet" "demo_pub_2" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = (known after apply)
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.1.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "demo-pub-2"
+        }
+      + tags_all                                       = {
+          + "Name" = "demo-pub-2"
+        }
+      + vpc_id                                         = "vpc-0600cc23ff2b40f27"
+    }
+
+Plan: 10 to add, 0 to change, 0 to destroy.
