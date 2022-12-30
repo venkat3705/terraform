@@ -13,10 +13,6 @@ resource "aws_instance" "web" {
     Owner = "rsiva"
   }
 
-  provisioner "local-exec" {
-    command = "echo ${aws_instance.web.public_ip} >> public_ip.txt"
-  }
-
   lifecycle {
     ignore_changes = [
       tags
@@ -61,6 +57,15 @@ resource "aws_security_group" "finance_sg" {
     description      = "http from VPC"
     from_port        = 443
     to_port          = 443
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  ingress {
+    description      = "for 8080"
+    from_port        = 8080
+    to_port          = 8080
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
