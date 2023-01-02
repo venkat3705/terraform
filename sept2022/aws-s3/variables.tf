@@ -8,4 +8,5 @@ variable "bucket_name" {
 variable "owner" {
   type        = string
   description = "Enter owner name"
+  default = "Rsiva"
 }
