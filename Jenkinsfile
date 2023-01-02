@@ -1,75 +1,72 @@
 pipeline {
-  agent  any
-  environment {
-    accountid = "your-account-id"
-    iamRole = "ec2-iam-role"
-    module = "tf-files-folder-path"
+    agent any
+    environment {
+        module = "sept2022/finance/"
     }
+
+    parameters {
+        choice choices: ['apply', 'destroy'], name: 'REQUESTED_ACTION'
+    }
+
+    tools {
+        terraform 'terraform'
+    }
+
     stages {
-
-      stage ('Checkout SCM'){
-        steps {
-          git 'https://github.com/rsivaseshu/terraform.git'
-        }
-      }
-
-     
-      stage('Set Terraform path') {
-       steps {
-         script {
-            def tfHome = tool name: 'terraform'
-            env.PATH = "${tfHome}:${env.PATH}"
-         }
-     }
-  }
-  stage('terraform init') {
- 
-       steps {
-           dir (module) {
-                script {
-                    withAWS(roleAccount:accountid, role:iamRole, useNode: true) {
-                    sh 'terraform init -no-color'
-                    }
-             }
-           }
-        }
-      }
-
-  stage('terraform Plan') {
- 
-       steps {
-           dir (module) {
-            
-               script {
-                    withAWS(roleAccount:accountid, role:iamRole, useNode: true) {
-                    sh 'terraform plan -no-color -out=plan.out'
-                    }
-               }
+        stage('scm'){
+            steps {
+                git 'https://github.com/rsivaseshu/terraform.git'
             }
         }
-      }
 
-  stage('Waiting for Approvals') {
-            
-      steps{
-          input('Plan Validated? Please approve to create VPC Network in AWS?')
-			  }
-      }    
-
-  stage('terraform Apply') {
- 
-       steps {
-           dir (module) {
-            
-              script {
-                    withAWS(roleAccount:accountid, role:iamRole, useNode: true) {
+        stage('terraform init') {
+            steps {
+                dir(module) {
+                    sh 'terraform init -no-color'
+                }
+            }
+        }
+        stage('terraform validate') {
+            steps {
+                dir(module) {
+                    sh 'terraform validate '
+                }
+            }
+        }
+        stage('terraform plan') {
+            steps {
+                dir(module) {
+                    sh 'terraform plan -no-color -out=plan.out'
+                }
+            }
+        }
+		stage('Waiting for Approvals') {
+    	    steps{
+      	        input('Plan Validated? Please approve to create VPC Network in AWS?')
+			}
+        } 
+        stage('terraform apply') {
+            when {
+                expression { params.REQUESTED_ACTION == 'apply' }
+            }
+            steps {
+                dir(module) {
                     sh 'terraform apply -no-color -auto-approve plan.out'
                     sh "terraform output"
-                    }
-              }
-            
-           }
+                }
+            }
         }
-      }
-   }
+        stage('terraform destroy') {
+            when {
+                expression { params.REQUESTED_ACTION == 'destroy' }
+            }
+            steps {
+                dir(module) {
+                    sh 'terraform destroy -no-color -auto-approve '
+                    sh "terraform output"
+                }
+            }
+        }
+    }
+
 }
