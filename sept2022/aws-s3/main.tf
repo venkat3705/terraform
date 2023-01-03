@@ -9,7 +9,7 @@ terraform {
 
 
 provider "aws" {
-  region  = "ap-south-1"
-#  profile = "rsiva"
+  region  = "ap-northeast-1"
+  profile = "administrator"
 }
 
