@@ -6,9 +6,9 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "rssr-tf-state"
+    bucket = "rss-sample-1"
     key    = "finance/infra"
-    region = "ap-south-1"
+    region = "ap-northeast-1"
 #    dynamodb_table = "finance-infra"
 #    profile = "rsiva"
   }
