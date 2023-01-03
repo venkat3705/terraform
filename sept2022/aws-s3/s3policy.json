@@ -9,7 +9,7 @@
                 "s3:GetObject"
             ],
             "Resource": [
-                "arn:aws:s3:::rssr-tf-sample-bucket-1/*"
+                "arn:aws:s3:::mvrr-tf-sample-bucket-1/*"
             ]
         }
     ]
